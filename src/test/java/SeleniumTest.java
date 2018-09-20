@@ -67,11 +67,11 @@ public class SeleniumTest {
 
         WebDriver driver;
 
-        driver = newDriver();
+        //driver = newDriver();
 
         //driver = newCloudDriver();
 
-        //driver = newCloudDriver2();
+        driver = newCloudDriver2();
 
         // And now use this to visit Google
         driver.get("http://www.google.com");
