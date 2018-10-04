@@ -1,3 +1,5 @@
+package tcon;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -9,17 +11,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class Selenium2Example {
+public class SeleniumTest {
 
     public static WebDriver newDriver() {
-
         System.setProperty("webdriver.chrome.driver", "C:/chrome-v2-33/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080");
@@ -37,6 +36,21 @@ public class Selenium2Example {
         dr.setPlatform(Platform.WINDOWS);
 
         RemoteWebDriver driver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), dr);
+
+        return driver;
+    }
+
+    public static WebDriver newCloudDriverFromSauceLab() throws MalformedURLException {
+        DesiredCapabilities dr=DesiredCapabilities.chrome();
+        dr.setBrowserName("chrome");
+        dr.setPlatform(Platform.WINDOWS);
+
+        String USERNAME = "tcon";
+        String ACCESS_KEY = "0fb6bb0b-4b4d-485d-b5d3-e889e8d6eeb1";
+        String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+
+
+        RemoteWebDriver driver=new RemoteWebDriver(new URL(URL), dr);
 
         return driver;
     }
@@ -67,9 +81,14 @@ public class Selenium2Example {
     @Test
     public void runTest() throws MalformedURLException {
 
+        String fileName = System.getProperty("driverName");
+        System.out.println(fileName+"----------------");
+
         WebDriver driver;
 
         driver = newDriver();
+
+        //driver = newCloudDriverFromSauceLab();
 
         //driver = newCloudDriver();
 
@@ -90,7 +109,8 @@ public class Selenium2Example {
         //element.submit();
 
         // Check the title of the page
-        System.out.println("Page title is: " + driver.getTitle());
+        System.out.println("AAPage title is: " + driver.getTitle());
+
 
         // Google's search is rendered dynamically with JavaScript.
         // Wait for the page to load, timeout after 10 seconds

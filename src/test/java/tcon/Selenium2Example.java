@@ -1,3 +1,5 @@
+package tcon;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -9,12 +11,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumTest {
+public class Selenium2Example {
 
     public static WebDriver newDriver() {
 
@@ -88,8 +92,7 @@ public class SeleniumTest {
         //element.submit();
 
         // Check the title of the page
-        System.out.println("AAPage title is: " + driver.getTitle());
-
+        System.out.println("Page title is: " + driver.getTitle());
 
         // Google's search is rendered dynamically with JavaScript.
         // Wait for the page to load, timeout after 10 seconds
